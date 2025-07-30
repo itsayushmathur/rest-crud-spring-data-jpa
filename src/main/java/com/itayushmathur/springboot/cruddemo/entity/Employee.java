@@ -3,27 +3,28 @@ package com.itayushmathur.springboot.cruddemo.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "employee")
+@Table(name="employee")
 public class Employee {
 
-    //define fields
+    // define fields
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name="id")
     private int id;
 
-    @Column(name = "first_name")
+    @Column(name="first_name")
     private String firstName;
 
-    @Column(name = "last_name")
+    @Column(name="last_name")
     private String lastName;
 
-    @Column(name = "email")
+    @Column(name="email")
     private String email;
 
-    //define constructors
 
+    // define constructors
     public Employee() {
+
     }
 
     public Employee(String firstName, String lastName, String email) {
@@ -32,13 +33,16 @@ public class Employee {
         this.email = email;
     }
 
-    //define getter/setter
+    // define getter/setter
+
     public int getId() {
         return id;
     }
+
     public void setId(int id) {
         this.id = id;
     }
+
     public String getFirstName() {
         return firstName;
     }
@@ -63,8 +67,7 @@ public class Employee {
         this.email = email;
     }
 
-    //define tostring
-
+    // define toString
     @Override
     public String toString() {
         return "Employee{" +

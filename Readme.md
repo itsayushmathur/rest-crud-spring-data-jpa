@@ -110,4 +110,85 @@ String finalName = name.orElse("Default Name");
 
 - Use when a method may or may not return a value
 ---
+## 🌐 Spring Data REST (Revision Notes)
 
+Spring Data REST is a Spring project that **automatically exposes CRUD REST APIs** for your Spring Data JPA repositories — **no controller code needed**.
+
+---
+
+### 🎯 Purpose
+
+- Rapidly build RESTful services from JPA repositories
+- Auto-generate endpoints for common operations
+- Follows **HATEOAS** (Hypermedia as the Engine of Application State)
+
+---
+
+### 🔧 How It Works
+
+| Layer               | Responsibility                                     |
+|---------------------|-----------------------------------------------------|
+| Repository Layer    | Extend `JpaRepository` or similar interface         |
+| Spring Data REST    | Automatically exposes repository methods as REST APIs |
+| HTTP Client         | Can consume the exposed endpoints using HTTP verbs |
+
+---
+
+### 🛠️ Setup Steps
+
+| Step | Task                                                  |
+|------|--------------------------------------------------------|
+| 1    | Add dependency: `spring-boot-starter-data-rest`        |
+| 2    | Define entity classes with `@Entity`                   |
+| 3    | Create repository interface (e.g., `UserRepository`)   |
+| 4    | Spring auto-generates REST endpoints at runtime        |
+
+---
+
+### 🔗 Default Endpoint Behavior
+
+| Action       | HTTP Method | Endpoint                  |
+|--------------|-------------|---------------------------|
+| Get all      | `GET`       | `/users`                  |
+| Get by ID    | `GET`       | `/users/{id}`             |
+| Create       | `POST`      | `/users`                  |
+| Update       | `PUT`       | `/users/{id}`             |
+| Delete       | `DELETE`    | `/users/{id}`             |
+
+---
+
+### ⚙️ Customization Options
+
+| Technique                        | Use Case                             |
+|----------------------------------|--------------------------------------|
+| `@RepositoryRestResource`        | Customize base path or export name   |
+| `@RestResource`                  | Customize method-level endpoints     |
+| `@Param` in method signatures    | Add query methods (e.g., by name)    |
+| `spring.data.rest.basePath=/api`| Change default API root path         |
+
+---
+
+### 📌 HATEOAS Support
+
+- Responses contain hypermedia links (`_links`)
+- Helps clients navigate resources dynamically
+- Example:
+
+```json
+{
+  "name": "John",
+  "_links": {
+    "self": { "href": "http://localhost:8080/users/1" },
+    "users": { "href": "http://localhost:8080/users" }
+  }
+}
+```
+✅ Summary
+- Spring Data REST eliminates the need to write boilerplate controllers
+
+- Automatically exposes RESTful endpoints for repositories
+
+- Great for quick prototyping, admin tools, or internal APIs
+
+- Use with caution in public APIs; you may want finer control for security & structure
+---
